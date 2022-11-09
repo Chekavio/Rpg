@@ -1,0 +1,47 @@
+boolean fight = true;
+        while(fight==true){
+
+            System.out.println("(1) Attaquer | (2) Voir son inventaire | (3) Se défendre");
+
+
+
+            int choice = Integer.parseInt(scan.nextLine());
+
+
+
+            switch (choice){
+                case 1 :
+                    System.out.println("Quel hero voulez-vous utiliser?\n");
+                    equipe.printEquipe();
+
+                    int h = Integer.parseInt(scan.nextLine());
+
+                    System.out.println("Vous avez choisi le "+equipe.getHero(h).getName());
+                    System.out.println("Qui souhaitez-vous attaquer?");
+                    adversaire.printAdversaire();
+
+                    int a = Integer.parseInt(scan.nextLine());
+
+                    adversaire.getAdversaire(a).health = adversaire.getAdversaire(a).health - equipe.getHero(h).damage;
+
+                    System.out.println("Votre "+equipe.getHero(h).getName()+" a infligé "+equipe.getHero(h).getDamage()+
+                            " dommages "+"à l'"+adversaire.getAdversaire(a).getName()+
+                            ", il lui reste "+adversaire.getAdversaire(a).getHealth()+" points de vie");
+
+                    adversaire.isDeadCheck(a);
+
+                    break;
+                case 2:
+                    System.out.println("Voici votre inventaire :");
+                    break;
+                case 3:
+                    System.out.println("Votre équipe se defend");
+                    break;
+                default:
+                    System.out.println("Veuillez choisir une de ces 3 options");
+                    break;
+
+
+
+            }
+        }

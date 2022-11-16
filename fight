@@ -1,47 +1,97 @@
-boolean fight = true;
-        while(fight==true){
+public void fight(Equipe equipe, Horde horde, int tour, int level, Inventory inventory, Hero hero) {
 
-            System.out.println("(1) Attaquer | (2) Voir son inventaire | (3) Se défendre");
+        boolean fight = true;
+        while(fight){
+
+            tour = tour + 1;
+            System.out.println("\n\n\n\n\nTour numero : "+tour);
+            System.out.println("\n(1) Attaquer | (2) Voir son inventaire | (3) Passer son tour");
 
 
 
-            int choice = Integer.parseInt(scan.nextLine());
+            int choice = getInt();
 
 
 
             switch (choice){
                 case 1 :
-                    System.out.println("Quel hero voulez-vous utiliser?\n");
-                    equipe.printEquipe();
+                    System.out.println("\nQuel hero voulez-vous utiliser?\n");
+                    equipe.printHeroList(equipe);
+                    int h = getInt();
+                    if(h <= equipe.equipeList.size()){
+                    System.out.println("\nQui souhaitez-vous attaquer?");
+                    horde.printEnemyList();
+                    int a = getInt();
+                        if(a <= horde.hordeList.size()){
+                            hero = equipe.getHero(h);
+                            hero.attack(h, a,horde, equipe);
 
-                    int h = Integer.parseInt(scan.nextLine());
+                            if (horde.hordeList.size() == 0){
+                                System.out.println("\nVous avez vaincu la horde de monstre !\n");
+                                fight = false;
+                            }else{
+                                horde.attack(equipe);
+                                equipe.reload();
 
-                    System.out.println("Vous avez choisi le "+equipe.getHero(h).getName());
-                    System.out.println("Qui souhaitez-vous attaquer?");
-                    adversaire.printAdversaire();
+                            }
 
-                    int a = Integer.parseInt(scan.nextLine());
+                        } else{
+                            System.out.println(("\nVeuillez choisir une option valide"));
+                            tour --;
+                        }
+                    }else{
+                        System.out.println(("\nVeuillez choisir une option valide"));
+                        tour --;
+                    }
 
-                    adversaire.getAdversaire(a).health = adversaire.getAdversaire(a).health - equipe.getHero(h).damage;
 
-                    System.out.println("Votre "+equipe.getHero(h).getName()+" a infligé "+equipe.getHero(h).getDamage()+
-                            " dommages "+"à l'"+adversaire.getAdversaire(a).getName()+
-                            ", il lui reste "+adversaire.getAdversaire(a).getHealth()+" points de vie");
+                    if (equipe.equipeList.size() == 0){
+                        System.out.println("\nVous n'avez plus de heros en vie\nVous avez perdu !");
+                        System.exit (1);
+                    }
 
-                    adversaire.isDeadCheck(a);
+
 
                     break;
                 case 2:
-                    System.out.println("Voici votre inventaire :");
-                    break;
+                    tour--;
+                    inventory.printStuffList();
+                    System.out.println("\n(1) Utiliser une potion | (2) Revenir en arrière");
+                    choice = getInt();
+                    if (choice == 1) {
+                        inventory.printStuffList();
+                        System.out.println("\nQuelle potion voulez-vos utiliser?\n");
+                        int potion = getInt();
+                        if (potion <= inventory.stuffList.size()) {
+                            System.out.println("\nSur qui voulez-vous l'utiliser?");
+                            equipe.printHeroList(equipe);
+                            h = getInt();
+                            if (h <= equipe.equipeList.size()) {
+                                inventory.useStuff(equipe, inventory.getStuff(potion), h, potion);
+                                break;
+                            } else {
+                                System.out.println(("\nVeuillez choisir une option valide"));
+                                break;
+                            }
+                        } else {
+                            System.out.println(("\nVeuillez choisir une option valide"));
+                            break;
+                        }
+                    }else {
+                        break;
+                    }
                 case 3:
-                    System.out.println("Votre équipe se defend");
+
                     break;
                 default:
-                    System.out.println("Veuillez choisir une de ces 3 options");
+                    System.out.println("\nVeuillez choisir une de ces deux options");
+                    tour --;
                     break;
 
 
 
             }
         }
+
+
+    }

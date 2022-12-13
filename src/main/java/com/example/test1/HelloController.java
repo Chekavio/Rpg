@@ -5,11 +5,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class HelloController {
+public class HelloController extends Controller{
+    @FXML
+    public Button mainButton;
     @FXML
     private Label welcomeText;
-    @FXML
-    private Button button;
 
     @FXML
     private TextField nbHero;
@@ -22,13 +22,8 @@ public class HelloController {
     int tour = 0;
 
     @FXML
-    protected void initialize() {
-       // button.setOnMouseClicked(mouseEvent -> {
-         //   welcomeText.setText(String.valueOf(compteur));
-           // compteur++;}
-       // );
+    public void initialize(GUIParser parser) {
 
-  //  button.setOnAction(game.fight(equipe,horde,tour, inventory));
     }
 
     public void setlabelText(String text){

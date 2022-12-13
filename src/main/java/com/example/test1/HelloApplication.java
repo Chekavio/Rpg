@@ -6,32 +6,32 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.Group;
-
 import java.io.IOException;
+import javafx.scene.Parent;
 
 
 
 public class HelloApplication extends Application {
 
+    FXMLLoader fxmlLoader;
+    Controller controller;
 
-    HelloController controller;
+    Stage stage;
 
     @Override
     public void start(Stage stage) throws IOException {
-
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        this.stage = stage;
+        this.fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        this.controller = fxmlLoader.getController();
-        this.controller.initialize();
-        //Group root = new Group();
-        //Scene scene = new Scene(root, Color.GREEN);
 
-        //stage.setTitle("RPG");
+
+
+        stage.setTitle("RPG");
         Image icon = new Image("iconSword.png");
         stage.getIcons().add(icon);
+
         stage.setX(50);
         stage.setY(50);
         stage.setWidth(640);
@@ -42,9 +42,19 @@ public class HelloApplication extends Application {
         stage.show();
     }
 
+    public void changeScene(String fxmlFile, GUIParser parser) throws IOException {
+        this.fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(fxmlFile));
+        Parent root = this.fxmlLoader.load();
+        this.controller = this.fxmlLoader.getController();
+
+        controller.initialize(parser);
+
+        Scene scene = new Scene(root, 320, 240);
+        this.stage.setScene(scene);
+        this.stage.show();
+    }
     public void lancer() {
         launch();
     }
-
 
 }

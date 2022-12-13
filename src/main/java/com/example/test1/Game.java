@@ -23,6 +23,7 @@ public class Game {
     public void choiceHero(Equipe equipe, Inventory inventory, int nombreHero) {
         String nom;
 
+
         for(int i = 0; i<nombreHero; i++){
             StringBuilder sb = new StringBuilder(String.format("%nQuel type de hero voulez vous pour le hero numero %d: ", i+1));
             List<String> heroes = List.of("Warrior", "Hunter", "Healer", "Mage");
@@ -281,26 +282,7 @@ public class Game {
         Equipe equipe = new Equipe();
         Horde horde = new Horde();
         Inventory inventory = new Inventory();
-        Hero hero = new Hero() {
 
-
-            @Override
-            public void attack(int a, Horde horde, Equipe equipe, InputParser inputParser) {
-
-            }
-
-            @Override
-            public void printHero(Equipe equipe, InputParser inputParser) {
-
-            }
-
-            @Override
-            public void printHeroStat(Equipe equipe, InputParser inputParser) {
-
-            }
-
-
-        };
 
         //Initialition
         int level =0;

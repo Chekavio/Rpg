@@ -3,11 +3,21 @@ package com.example.test1;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ControllerChoiceHero extends Controller{
+    Game game;
+    GUIParser parser;
+
+    @FXML
+    public TextField classField;
+    @FXML
+    public TextField nameField;
+    @FXML
+    public Button button;
+    @FXML
+    public Label myLabel;
     @FXML
     public TableColumn<Hero,String> classType;
     @FXML
@@ -20,25 +30,47 @@ public class ControllerChoiceHero extends Controller{
     public TableColumn<Hero,String> restistance;
 
     @FXML
-    private TableView<Hero> tableView;
+    public TableView<Hero> tableView;
 
-    GUIParser parser;
+    int herocompteur = 0;
 
 
     @Override
     public void initialize(GUIParser parser) {
+        this.game = parser.getGame();
         this.parser = parser;
-        makeTable();
-        //Hero hero = tableView.getSelectionModel().getSelectedItem()
+        button.setOnAction(actionEvent -> {
+
+            try {
+                heroParameters();
+                makeTable();
+                herocompteur++;
+                game.setHerocompteur(herocompteur);
+
+                if(game.getHerocompteur()==game.getNombreHero()){
+                    game.buildHorde(game.getNombreHero(), game.getLevel());
+                    parser.fight();
+                }
+
+            }
+           catch (NumberFormatException e){
+                myLabel.setText("Il y a une erreur, réessayez correctement");
+
+            }catch (Exception e) {
+                e.printStackTrace();
+                myLabel.setText("Il y a une erreur, réessayez correctement");
+            }
+
+        });
+
+        //Hero hero = tableView.getSelectionModel().getSelectedItem();//selectionner un hero dans le tableau
     }
     public ObservableList<Hero> heroListMaker(){
         Equipe equipe = this.parser.game.getEquipe();
-        new Warrior("Guyguy",1.0,1.0,1.0,equipe);
         ObservableList<Hero> list = FXCollections.observableArrayList();
         for(Combatant combatant : equipe.equipeList){
           list.add((Hero) combatant);
         }
-
 
        return list;
 
@@ -56,4 +88,26 @@ public class ControllerChoiceHero extends Controller{
 
 
     }
+
+
+    public void heroParameters(){
+        int classe = Integer.parseInt(classField.getText());
+        String name = nameField.getText();
+        if(classe <= 4 && classe>=1) {
+            game.setClasse(classe);
+            game.setName(name);
+            game.heroCreation(classe, name);
+
+        }
+        else {
+            myLabel.setText("Selectionnez un chiffre entre 1 et 4");
+        }
+
+    }
+
+
 }
+
+
+
+

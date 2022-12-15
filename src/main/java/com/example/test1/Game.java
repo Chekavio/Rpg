@@ -15,9 +15,12 @@ public class Game {
     private Horde horde = new Horde();
     private HelloApplication app;
 
+    public int herocompteur;
+    public int classe;
     public int nombreHero;
     public int level;
     public int tour;
+    public String name;
 
     public Game(){
 
@@ -104,10 +107,11 @@ public class Game {
         }
         inputparser.printMessage("\n\nVoici votre équipe : ");
         equipe.printHeroList(equipe, inputparser);
-        buildHorde(horde, nombreHero, level);
+        buildHorde(nombreHero, level);
     }
 
-    public void buildHorde(Horde horde, int nombreHero, int level){
+
+    public void buildHorde(int nombreHero, int level){
         for(int i=0; i<nombreHero; i++){
             switch (level){
                 case 0:
@@ -229,6 +233,14 @@ public class Game {
 
     }
 
+    public int getLevel() {
+        return level;
+    }
+
+    public void setApp(int level) {
+        this.level = level;
+    }
+
     public void setInputparser(InputParser inputparser) {
         this.inputparser = inputparser;
     }
@@ -346,4 +358,57 @@ public class Game {
     public Inventory getInventory() {
         return inventory;
     }
+
+    public void setHerocompteur(int herocompteur) {
+        this.herocompteur = herocompteur;
+    }
+
+    public void setClasse(int classe) {
+        this.classe = classe;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getClasse() {
+        return classe;
+    }
+
+    public int getHerocompteur() {
+        return herocompteur;
+    }
+
+    public int getNombreHero() {
+        return nombreHero;
+    }
+
+    public void heroCreation(int classe, String name){
+        new Potion("Potion de soin", 20, inventory);
+        switch (classe){
+            case 1:
+                new Warrior(name,20.0,100.0, 0, equipe);
+                break;
+
+            case 2:
+                new Hunter(name,10.0,100.0,0, equipe,2.0);
+                break;
+
+            case 3:
+                new Healer(name,5.0,100.0,30, 0, equipe);
+                break;
+
+
+            case 4:
+                new Mage(name,25.0,100.0,30,0, equipe);
+                break;
+        }
+
+    }
 }
+
+

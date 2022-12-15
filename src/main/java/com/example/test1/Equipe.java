@@ -46,10 +46,7 @@ public class Equipe {
 
 }
 
-    //public Hero getEquipeList(){
 
-        //return;
-//    }
 }
 
 

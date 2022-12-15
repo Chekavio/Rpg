@@ -61,4 +61,11 @@ public class GUIParser implements InputParser {
     public Game getGame() {
         return game;
     }
+    public void fight() {
+        try {
+            this.app.changeScene("scene-four.fxml", this);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

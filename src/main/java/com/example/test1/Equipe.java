@@ -6,6 +6,7 @@ public class Equipe {
 
     public ArrayList<Hero> equipeList = new ArrayList<>();
 
+
     public void addHero(Hero hero) {
         this.equipeList.add(hero);
     }
@@ -27,8 +28,8 @@ public class Equipe {
 
         }
 
-
     }
+
 
 
 
@@ -44,6 +45,11 @@ public class Equipe {
 
 
 }
+
+    //public Hero getEquipeList(){
+
+        //return;
+//    }
 }
 
 

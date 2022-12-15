@@ -17,8 +17,8 @@ public class HelloApplication extends Application {
 
     FXMLLoader fxmlLoader;
     Controller controller;
-
     Stage stage;
+
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -26,11 +26,16 @@ public class HelloApplication extends Application {
         this.fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
 
-
-
         stage.setTitle("RPG");
         Image icon = new Image("iconSword.png");
         stage.getIcons().add(icon);
+
+        Game game = new Game(this);
+        GUIParser parser = new GUIParser(this,game);
+        game.setInputparser(parser);
+        Controller controller = this.fxmlLoader.getController();
+        controller.initialize(parser);
+
 
         stage.setX(50);
         stage.setY(50);
@@ -40,6 +45,7 @@ public class HelloApplication extends Application {
         stage.setFullScreen(false);
         stage.setScene(scene);
         stage.show();
+
     }
 
     public void changeScene(String fxmlFile, GUIParser parser) throws IOException {
@@ -53,8 +59,16 @@ public class HelloApplication extends Application {
         this.stage.setScene(scene);
         this.stage.show();
     }
-    public void lancer() {
+    public static void lancer() {
         launch();
+    }
+
+    public static void main(String[] args) {
+        Game.welcome();
+
+    }
+    public FXMLLoader getFxmlLoader() {
+        return fxmlLoader;
     }
 
 }

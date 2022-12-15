@@ -7,25 +7,71 @@ import java.util.Scanner;
 
 
 public class Game {
-    InputParser inputparser = new ConsoleParser();
-
+    InputParser inputparser = new ConsoleParser(this);
     Scanner scan = new Scanner(System.in);
 
+    private Equipe equipe= new Equipe();
+    private Inventory inventory = new Inventory();
+    private Horde horde = new Horde();
+    private HelloApplication app;
 
-    public int askEquipeNb() {
-        inputparser.printMessage("Combien de heros voulez-vous dans votre equipe ?");
-        int nombreHero = inputparser.getIntInRange(1,10);
-        return nombreHero;
+    public int nombreHero;
+    public int level;
+    public int tour;
+
+    public Game(){
 
     }
 
+    public Game(HelloApplication app){
+        this.app = app;
+    }
 
-    public void choiceHero(Equipe equipe, Inventory inventory, int nombreHero) {
+    public int askEquipeNb() {
+        inputparser.printMessage("Combien de heros voulez-vous dans votre equipe ?");
+        nombreHero = inputparser.getIntInRange(1,4);
+
+        return nombreHero;
+
+    }
+    public void setNbHero(int nombreHero){
+        this.nombreHero = nombreHero;
+    }
+    public void setTour(int tour){
+        this.tour = tour;
+    }
+
+    public void setLevel(int level){
+        this.level = level;
+    }
+
+    public static void welcome(){
+        System.out.println("Bienvenue sur ce RPG\n");
+
+        System.out.println("Voulez vous jouer sur la console ou avec l'interface graphique?" +
+                "\n(1)Console\n(2)Interface graphique");
+        Scanner sc = new Scanner(System.in);
+        int gameint = sc.nextInt();
+        if (gameint == 2){
+            HelloApplication.lancer();
+
+        }else{
+            Game game = new Game();
+            game.start2();
+        }
+
+    }
+
+    public void start2(){
+        this.inputparser.askEquipeNb();
+    }
+
+    public void choiceHero(Equipe equipe, Inventory inventory) {
         String nom;
 
 
         for(int i = 0; i<nombreHero; i++){
-            StringBuilder sb = new StringBuilder(String.format("%nQuel type de hero voulez vous pour le hero numero %d: ", i+1));
+            StringBuilder sb = new StringBuilder(String.format("%nQuel type de hero voulez-vous pour le hero numero %d: ", i+1));
             List<String> heroes = List.of("Warrior", "Hunter", "Healer", "Mage");
             for (int j = 0; j < heroes.size(); j++) {
                 sb.append(String.format("(%d) %s ", j+1, heroes.get(j)));
@@ -56,6 +102,9 @@ public class Game {
             }
 
         }
+        inputparser.printMessage("\n\nVoici votre équipe : ");
+        equipe.printHeroList(equipe, inputparser);
+        buildHorde(horde, nombreHero, level);
     }
 
     public void buildHorde(Horde horde, int nombreHero, int level){
@@ -79,6 +128,7 @@ public class Game {
             }
 
         }
+        fight(equipe, horde, tour, inventory);
 
     }
 
@@ -169,15 +219,19 @@ public class Game {
     }
 
 
-    public void endGame(int level) {
+    public void gameCheck(int level) {
         if(level == 4){
             inputparser.printMessage("Bravo vous avez vaincu toutes les hordes de monstre !\nLe jeu prend fin");
             System.exit (1);
+        }else{
+
         }
 
     }
 
-
+    public void setInputparser(InputParser inputparser) {
+        this.inputparser = inputparser;
+    }
 
     public void fight(Equipe equipe, Horde horde, int tour, Inventory inventory) {
         ArrayList<Combatant> allCombatant = new ArrayList<>();
@@ -265,41 +319,17 @@ public class Game {
 
     public  void start(){
 
-        inputparser.printMessage("Bienvenue sur ce RPG\n");
-        Scanner scan = new Scanner(System.in);
-
-        inputparser.printMessage("Voulez vous jouer sur la console ou avec l'interface graphique?" +
-                "\n(1)Console\n(2)Interface graphique");
-        int gameint = inputparser.getIntInRange(1,2);
-        if (gameint == 2){
-            inputparser = new GUIParser();
-
-        }
 
 
-        int nombreHero = askEquipeNb();
 
-        Equipe equipe = new Equipe();
-        Horde horde = new Horde();
-        Inventory inventory = new Inventory();
-
-
-        //Initialition
-        int level =0;
-        int tour = 0;
-
-        choiceHero(equipe, inventory, nombreHero);
-        inputparser.printMessage("\n\nVoici votre équipe : ");
-        equipe.printHeroList(equipe, inputparser);
 
 
         for (int currentLevel = 0; currentLevel <= 3; currentLevel++) {
 
-                buildHorde(horde, nombreHero, level);
-                startBattle(horde);
-                fight(equipe, horde, tour, inventory);
+
+
                 level ++;
-                endGame(level);
+                gameCheck(level);
                 levelUp(level, equipe, inventory);
 
 
@@ -309,5 +339,11 @@ public class Game {
 
     }
 
+    public Equipe getEquipe() {
+        return equipe;
+    }
 
+    public Inventory getInventory() {
+        return inventory;
+    }
 }

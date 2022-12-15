@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test1.ControllerChoiceHero">
+   <children>
+      <TableView layoutX="71.0" layoutY="64.0" prefHeight="200.0" prefWidth="378.0">
+        <columns>
+          <TableColumn fx:id="classType" prefWidth="75.0" text="Classe" />
+          <TableColumn fx:id="name" prefWidth="75.0" text="Nom" />
+            <TableColumn fx:id="health" prefWidth="75.0" text="Vitalité" />
+            <TableColumn fx:id="damage" prefWidth="75.0" text="Attaque" />
+            <TableColumn fx:id="restistance" prefWidth="75.0" text="Résistence" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

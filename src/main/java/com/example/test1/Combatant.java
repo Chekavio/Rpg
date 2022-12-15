@@ -27,6 +27,12 @@ public abstract class Combatant {
         return name;
     }
 
+    public String getClassType() {
+        return classType;
+    }
 
+    public double getResistance() {
+        return resistance;
+    }
 }
 

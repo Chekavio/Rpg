@@ -10,5 +10,7 @@ public interface InputParser {
 
     void printStringBuilder(StringBuilder stringBuilder);
 
+    void askEquipeNb();
+
 }
 

@@ -42,7 +42,7 @@ public class Horde {
         Random random = new Random();
         int h = random.nextInt(equipe.equipeList.size()) + 1;
         int a = random.nextInt(this.hordeList.size()) + 1;
-        equipe.getHero(h).health = equipe.getHero(h).health - this.getEnemy(a).damage;
+        equipe.getHero(h).health = equipe.getHero(h).health - (this.getEnemy(a).damage-equipe.getHero(h).resistance);
         inputParser.printMessage("\n\nLe "+this.getEnemy(a).getName()+" a infligé "+this.getEnemy(a).getDamage()+" dégats à "+equipe.getHero(h).getName()+
                 ".\nIl ne lui reste plus que "+equipe.getHero(h).getHealth()+" points de vie !");
 

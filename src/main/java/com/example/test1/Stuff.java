@@ -1,10 +1,12 @@
 package com.example.test1;
 
-public class Stuff {
+public class Stuff extends Inventory{
 
-protected String name;
-protected double value;
+    public void useStuffGUI(Hero hero, Inventory inventory){
+        hero.health = hero.health + this.value;
 
+        inventory.stuffList.remove(inventory);
+    }
 
 }
 

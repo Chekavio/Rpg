@@ -49,7 +49,6 @@ public class ControllerFight extends Controller {
     public void initialize(GUIParser parser) {
         this.game = parser.getGame();
         this.parser = parser;
-        game.buildHorde(game.getEquipe().equipeList.size(), game.getLevel());
         makeTableHero();
         makeTableEnemy();
         buttonFight.setOnAction(actionEvent -> {
@@ -61,14 +60,15 @@ public class ControllerFight extends Controller {
                 tableViewHero.setItems(heroListMaker());
                 tableViewEnemy.refresh();
                 tableViewHero.refresh();
-                //makeTableEnemy();
-                //makeTableHero();
-                //tableViewEnemy.getSelectionModel().getSelectedItem().setHealth(enemy.getHealth());
-                //tableViewHero.getSelectionModel().getSelectedItem().setHealth(hero.getHealth());
+                labelAction.setText("");
 
-                // labelAction.setText("");
                 if(game.getHorde().hordeList.size()==0){
-                    parser.levelUp();
+                    game.upgrade(1);
+                    if(game.getLevel()==4){
+                        parser.win();
+                    }else{
+                        parser.levelUp();
+                    }
                 }
                 if(game.getEquipe().equipeList.size()==0){
                     parser.loose();
@@ -86,8 +86,15 @@ public class ControllerFight extends Controller {
             }
 
 
+
     });
+        buttonStuff.setOnAction(actionEvent -> {
+            parser.Inventory();
+        });
+
     }
+
+
     public ObservableList<Hero> heroListMaker(){
         Equipe equipe = this.parser.game.getEquipe();
         ObservableList<Hero> listHero = FXCollections.observableArrayList();
@@ -99,10 +106,6 @@ public class ControllerFight extends Controller {
         Horde horde = this.parser.game.getHorde();
         ObservableList<Enemy> listEnemy = FXCollections.observableArrayList();
         listEnemy.addAll(horde.hordeList);
-        System.out.println(listEnemy);
-        for (Enemy en: listEnemy) {
-            System.out.printf("enemy's health: %s%n", en.health);
-        }
 
         return listEnemy;
     }
@@ -129,6 +132,7 @@ public class ControllerFight extends Controller {
 
 
     }
+
 }
 
 

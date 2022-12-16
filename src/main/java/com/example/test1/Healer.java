@@ -16,17 +16,12 @@ public class Healer extends SpellCaster {
 
 
 
-    @Override
-    public boolean hasMana() {
-
-        return true;
-    }
 
     @Override
     public void attack(int a, Horde horde, Equipe equipe, InputParser inputParser) {
-        hasMana();
+
         Random random = new Random();
-        if(hasMana()){
+        if(this.mana>10){
             horde.getEnemy(a).health = horde.getEnemy(a).health - this.damage;
             int heal = random.nextInt(equipe.equipeList.size()) + 1;
             equipe.getHero(heal).health = equipe.getHero(heal).health + 4*this.damage;
@@ -47,8 +42,18 @@ public class Healer extends SpellCaster {
 
     @Override
     public void attackGUI(Enemy enemy, Horde horde, Equipe equipe) {
+        Random random = new Random();
+        if(this.mana>10){
+            enemy.health = enemy.health - this.damage;
+            int heal = random.nextInt(equipe.equipeList.size()) + 1;
+            equipe.getHero(heal).health = equipe.getHero(heal).health + 4*this.damage;
+            this.mana = this.mana-10;
+            equipe.reload();
+            horde.EnemyIsDeadCheckGUI(enemy);
+        }
 
     }
+
 
     @Override
 

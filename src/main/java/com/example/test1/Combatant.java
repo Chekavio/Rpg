@@ -32,7 +32,6 @@ public abstract class Combatant {
     }
 
     public double getResistance() {
-        System.out.println("hello");
         return resistance;
     }
 

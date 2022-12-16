@@ -82,4 +82,26 @@ public class GUIParser implements InputParser {
             throw new RuntimeException(e);
         }
     }
+    public void Inventory() {
+        try {
+            this.app.changeScene("scene-inventory.fxml", this);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void win() {
+        try {
+            this.app.changeScene("scene-win.fxml", this);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void builHorde(){
+        try {
+            game.buildHorde(game.getEquipe().equipeList.size(), game.getLevel());
+            this.app.changeScene("scene-four.fxml", this);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

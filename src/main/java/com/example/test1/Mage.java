@@ -20,8 +20,7 @@ public class Mage extends SpellCaster {
 
     @Override
     public void attack(int a, Horde horde, Equipe equipe, InputParser inputParser) {
-        hasMana();
-        if(hasMana()){
+        if(this.mana>10){
         horde.getEnemy(a).health = horde.getEnemy(a).health - this.damage;
         this.mana = this.mana-10;
         inputParser.printMessage("Votre "+this.getName()+" a infligé "+this.getDamage()+
@@ -37,7 +36,13 @@ public class Mage extends SpellCaster {
 
     @Override
     public void attackGUI(Enemy enemy, Horde horde, Equipe equipe) {
+        if(this.mana>10){
+            enemy.health = enemy.health - this.damage;
+            this.mana = this.mana-10;
+            equipe.reload();
+            horde.EnemyIsDeadCheckGUI(enemy);
 
+        }
     }
 
     @Override

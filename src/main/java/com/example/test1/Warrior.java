@@ -24,7 +24,8 @@ public class Warrior extends Hero {
 
     @Override
     public void attackGUI(Enemy enemy, Horde horde, Equipe equipe) {
-
+        enemy.health = enemy.health - this.damage;
+        horde.EnemyIsDeadCheckGUI(enemy);
     }
 
     @Override

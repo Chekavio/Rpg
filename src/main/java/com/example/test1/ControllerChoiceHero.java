@@ -7,9 +7,17 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ControllerChoiceHero extends Controller{
+    int classe =0;
     Game game;
     GUIParser parser;
-
+    @FXML
+    public Button button1;
+    @FXML
+    public Button button3;
+    @FXML
+    public Button button4;
+    @FXML
+    public Button button2;
     @FXML
     public TextField classField;
     @FXML
@@ -31,9 +39,7 @@ public class ControllerChoiceHero extends Controller{
 
     @FXML
     public TableView<Hero> tableView;
-
-    int herocompteur = 0;
-
+    
 
     @Override
     public void initialize(GUIParser parser) {
@@ -46,7 +52,7 @@ public class ControllerChoiceHero extends Controller{
                 makeTable();
 
                 if(game.getNombreHero()==game.getEquipe().equipeList.size()){
-                    parser.fight();
+                    parser.builHorde();
                 }
 
             }
@@ -59,6 +65,22 @@ public class ControllerChoiceHero extends Controller{
                 myLabel.setText("Il y a une erreur, réessayez correctement");
 
             }
+
+        });
+        button1.setOnAction(actionEvent -> {
+        classe=1;
+
+        });
+        button2.setOnAction(actionEvent -> {
+            classe=2;
+
+        });
+        button3.setOnAction(actionEvent -> {
+            classe=3;
+
+        });
+        button4.setOnAction(actionEvent -> {
+            classe=4;
 
         });
     }
@@ -86,7 +108,6 @@ public class ControllerChoiceHero extends Controller{
 
 
     public void heroParameters(){
-        int classe = Integer.parseInt(classField.getText());
         String name = nameField.getText();
         if(classe <= 4 && classe>=1) {
             game.setClasse(classe);

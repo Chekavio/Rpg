@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test1.ControllerInventory">
+   <children>
+      <TableView fx:id="tableViewInventory" layoutX="419.0" layoutY="53.0" prefHeight="200.0" prefWidth="152.0">
+        <columns>
+          <TableColumn fx:id="stuffName" prefWidth="75.0" text="Nom" />
+          <TableColumn fx:id="stuffEffect" prefWidth="75.0" text="Soin" />
+        </columns>
+      </TableView>
+      <TableView fx:id="tableViewHero" layoutX="14.0" layoutY="53.0" prefHeight="200.0" prefWidth="377.0">
+         <columns>
+            <TableColumn fx:id="classtype" prefWidth="75.0" text="Classe" />
+            <TableColumn fx:id="heroName" prefWidth="75.0" text="Nom" />
+            <TableColumn fx:id="heroHealth" prefWidth="75.0" text="Vitalité" />
+            <TableColumn fx:id="heroDamage" prefWidth="75.0" text="Attaque" />
+            <TableColumn fx:id="heroResistance" prefWidth="75.0" text="Résistance" />
+         </columns>
+      </TableView>
+      <Button fx:id="button" layoutX="354.0" layoutY="292.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" text="Soigner" />
+      <Button fx:id="buttonExit" layoutX="140.0" layoutY="292.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" text="Retour" />
+   </children>
+</AnchorPane>

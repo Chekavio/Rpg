@@ -12,6 +12,7 @@ public class Game {
 
     private Equipe equipe= new Equipe();
     private Inventory inventory = new Inventory();
+    private Stuff stuff = new Stuff();
     private Horde horde = new Horde();
     private HelloApplication app;
 
@@ -24,28 +25,39 @@ public class Game {
     public Game(){
 
     }
+    public Equipe getEquipe() {
+        return equipe;
+    }
+    public Horde getHorde() {
+        return horde;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void setClasse(int classe) {
+        this.classe = classe;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+    public int getNombreHero() {return nombreHero;}
+    public void setNbHero(int nombreHero){this.nombreHero = nombreHero;}
+    public int getLevel() {return level;}
+    public void setInputparser(InputParser inputparser) {
+        this.inputparser = inputparser;
+    }
 
     public Game(HelloApplication app){
         this.app = app;
     }
 
-    public int askEquipeNb() {
-        inputparser.printMessage("Combien de heros voulez-vous dans votre equipe ?");
-        nombreHero = inputparser.getIntInRange(1,4);
-
-        return nombreHero;
-
-    }
-    public void setNbHero(int nombreHero){
-        this.nombreHero = nombreHero;
-    }
-    public void setTour(int tour){
-        this.tour = tour;
-    }
-
-    public void setLevel(int level){
-        this.level = level;
-    }
     public void upgrade(int i){
         this.level=level+1;
     }
@@ -110,6 +122,9 @@ public class Game {
         inputparser.printMessage("\n\nVoici votre équipe : ");
         equipe.printHeroList(equipe, inputparser);
         buildHorde(nombreHero, level);
+        fight(equipe, horde, tour, inventory);
+
+
     }
 
 
@@ -134,31 +149,7 @@ public class Game {
             }
 
         }
-       // fight(equipe, horde, tour, inventory);
 
-    }
-
-
-
-    public void startBattle(Horde horde){
-
-        inputparser.printMessage("""
-
-                \n\nUne horde de monstre arrive ! ...
-                Voulez-vous l'affronter?
-                
-                (1) Affronter la horde
-                (2) Fuir !""");
-
-        int battle = inputparser.getInt();
-        if (battle == 1) {
-            inputparser.printMessage("La horde vous attaque !");
-            horde.printEnemyStat(inputparser);
-
-        } else {
-            inputparser.printMessage("Le jeu prend fin");
-            System.exit(1);
-        }
     }
 
     public void levelUp(int level, Equipe equipe, Inventory inventory, int bonus){
@@ -169,7 +160,6 @@ public class Game {
                 "\n(1) Toute votre équipe gagne 10 points de dégats\n(2) Toute votre équipe gagne 10 points de réduction de dégats");
                 boolean choice = false;
                 while (!choice){
-                    //bonus = inputparser.getIntInRange(1,2);
                     switch (bonus){
                         case 1:
                             for(int h =1; h<(equipe.equipeList.size()+1); h++){
@@ -190,7 +180,6 @@ public class Game {
             case 2:
                 inputparser.printMessage("Vous passez au niveau supérieur !\nVeuillez choisir un bonus :" +
                         "\n(1) Obtenir 5 potions de heal\n(2) Toute votre équipe gagne 30 points de vie");
-               // bonus = inputparser.getIntInRange(1,2);
                 switch (bonus){
                     case 1:
                         for(int h=0; h<5; h++){
@@ -207,7 +196,6 @@ public class Game {
             case 3:
                 inputparser.printMessage("Vous passez au niveau supérieur !\nVeuillez choisir un bonus :" +
                         "\n(1) Toute votre équipe gagne 25 points d'attaque\n(2) Toute votre équipe gagne 100 points de vie");
-                //bonus = inputparser.getIntInRange(1,2);
                 switch (bonus){
                     case 1:
                         for(int h =1; h<(equipe.equipeList.size()+1); h++){
@@ -223,28 +211,77 @@ public class Game {
                 break;
         }
     }
+    public void levelUpConsole(Equipe equipe, Inventory inventory){
+        switch (level){
+
+            case 1:
+                inputparser.printMessage("Vous passez au niveau supérieur !\nVeuillez choisir un bonus :" +
+                        "\n(1) Toute votre équipe gagne 10 points de dégats\n(2) Toute votre équipe gagne 10 points de réduction de dégats");
+
+                    int bonus = inputparser.getIntInRange(1,2);
+                    switch (bonus){
+                        case 1:
+                            for(int h =1; h<(equipe.equipeList.size()+1); h++){
+                                equipe.getHero(h).damage += 10;
+
+                            }
+                            break;
+                        case 2:
+                            for(int h =1; h<(equipe.equipeList.size()+1); h++){
+                                equipe.getHero(h).resistance += 10;
+
+                            }
+                            break;
+                    }
+
+
+                break;
+            case 2:
+                inputparser.printMessage("Vous passez au niveau supérieur !\nVeuillez choisir un bonus :" +
+                        "\n(1) Obtenir 5 potions de heal\n(2) Toute votre équipe gagne 30 points de vie");
+                bonus = inputparser.getIntInRange(1,2);
+                switch (bonus){
+                    case 1:
+                        for(int h=0; h<5; h++){
+                            new Potion("Potion de soin", 20, inventory);
+                        }
+                        break;
+                    case 2:
+                        for(int h =1; h<(equipe.equipeList.size()+1); h++){
+                            equipe.getHero(h).health += 30;
+                        }
+                        break;
+                }
+                break;
+            case 3:
+                inputparser.printMessage("Vous passez au niveau supérieur !\nVeuillez choisir un bonus :" +
+                        "\n(1) Toute votre équipe gagne 25 points d'attaque\n(2) Toute votre équipe gagne 100 points de vie");
+                bonus = inputparser.getIntInRange(1,2);
+                switch (bonus){
+                    case 1:
+                        for(int h =1; h<(equipe.equipeList.size()+1); h++){
+                            equipe.getHero(h).damage += 25;
+                        }
+                        break;
+                    case 2:
+                        for(int h =1; h<(equipe.equipeList.size()+1); h++){
+                            equipe.getHero(h).health += 100;
+                        }
+                        break;
+                }
+                break;
+        }
+        buildHorde(nombreHero,level);
+        fight(equipe,horde,tour,inventory);
+    }
 
 
     public void gameCheck(int level) {
         if(level == 4){
             inputparser.printMessage("Bravo vous avez vaincu toutes les hordes de monstre !\nLe jeu prend fin");
             System.exit (1);
-        }else{
-
         }
 
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public void setApp(int level) {
-        this.level = level;
-    }
-
-    public void setInputparser(InputParser inputparser) {
-        this.inputparser = inputparser;
     }
 
     public void fight(Equipe equipe, Horde horde, int tour, Inventory inventory) {
@@ -269,124 +306,62 @@ public class Game {
 
 
             int choice = inputparser.getIntInRange(1,2);
-            switch (choice){
-                case 1 :
-
+            switch (choice) {
+                case 1 -> {
                     int perso = random.nextInt(allCombatant.size());
-                    inputparser.printMessage("C'est le tour de : "+allCombatant.get(perso).getName());
-
-                    if(allCombatant.get(perso) instanceof Enemy){
-                     //   horde.attack(hero, equipe, inputparser);
+                    inputparser.printMessage("C'est le tour de : " + allCombatant.get(perso).getName());
+                    if (allCombatant.get(perso) instanceof Enemy) {
+                        Hero hero = equipe.getHero(1);
+                        horde.attack(hero, equipe, inputparser);
                         allCombatant.remove(allCombatant.remove(perso));
-                        if(equipe.equipeList.size()==0){
+                        if (equipe.equipeList.size() == 0) {
                             inputparser.printMessage("Tout vos héros sont mort : GAME OVER");
                             System.exit(1);
                         }
 
-                    }
-                    else {
+                    } else {
                         ((Hero) allCombatant.get(perso)).printHeroStat(equipe, inputparser);
                         inputparser.printMessage("Qui voulez-vous attaquer?");
                         horde.printEnemyList(inputparser);
-                        int target = inputparser.getIntInRange(1,horde.hordeList.size());
+                        int target = inputparser.getIntInRange(1, horde.hordeList.size());
 
                         ((Hero) allCombatant.get(perso)).attack(target, horde, equipe, inputparser);
                         allCombatant.remove(allCombatant.get(perso));
 
-                        if(horde.hordeList.size()==0){
+                        if (horde.hordeList.size() == 0) {
+                            gameCheck(level);
+                            level++;
+                            levelUpConsole(equipe, inventory);
                             fight = false;
                         }
                         equipe.reload();
                     }
-
-
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     tour--;
-                    inventory.printStuffList(inputparser);
-                    inputparser.printMessage("\n(1) Utiliser une potion | (2) Revenir en arrière");
-                    choice = inputparser.getIntInRange(1,2);
-                    if (choice == 1) {
                         inventory.printStuffList(inputparser);
                         inputparser.printMessage("\nQuelle potion voulez-vos utiliser?\n");
-                        int potion = inputparser.getIntInRange(1,inventory.stuffList.size());
+                        int potion = inputparser.getIntInRange(1, inventory.stuffList.size());
 
                         inputparser.printMessage("\nSur qui voulez-vous l'utiliser?");
                         equipe.printHeroList(equipe, inputparser);
                         int h = inputparser.getIntInRange(1, equipe.equipeList.size());
 
                         inventory.useStuff(equipe, inventory.getStuff(potion), h, potion, inputparser);
-                        break;
 
 
-                    } else {
-                        break;
+
                     }
+                }
             }
 
 
         }
 
-    }
 
 
-
-    public  void start(){
-
-
-
-
-
-
-        for (int currentLevel = 0; currentLevel <= 3; currentLevel++) {
-
-
-
-                level ++;
-                gameCheck(level);
-
-
-
-        }
-
-
-
-    }
-
-    public Equipe getEquipe() {
-        return equipe;
-    }
-
-    public Horde getHorde() {
-        return horde;
-    }
-
-    public Inventory getInventory() {
-        return inventory;
-    }
-
-    public void setClasse(int classe) {
-        this.classe = classe;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getClasse() {
-        return classe;
-    }
-
-    public int getNombreHero() {
-        return nombreHero;
-    }
-
-    public void heroCreation(int classe, String name){
-        new Potion("Potion de soin", 20, inventory);
+    void heroCreation(int classe, String name){
+        new Potion("Potion", 20, inventory);
         switch (classe){
             case 1:
                 new Warrior(name,20.0,100.0, 0, equipe);
@@ -414,6 +389,9 @@ public class Game {
             horde.attack(hero, equipe, inputparser);
         }
 
+    }
+    public void useStuff(Hero hero, Inventory inventory){
+        stuff.useStuffGUI(hero, inventory);
     }
 }
 

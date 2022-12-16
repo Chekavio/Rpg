@@ -40,8 +40,6 @@ public class Hunter extends Hero {
             equipe.reload();
             horde.EnemyIsDeadCheckGUI(enemy);
 
-        }else{
-            System.out.println("Plus de flêches");
         }
     }
 

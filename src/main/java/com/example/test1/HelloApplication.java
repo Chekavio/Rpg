@@ -26,8 +26,8 @@ public class HelloApplication extends Application {
         this.fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
 
-        stage.setTitle("RPG");
-        Image icon = new Image("iconSword.png");
+        stage.setTitle("Dofus");
+        Image icon = new Image("dofusLogo.png");
         stage.getIcons().add(icon);
 
         Game game = new Game(this);
@@ -66,9 +66,6 @@ public class HelloApplication extends Application {
     public static void main(String[] args) {
         Game.welcome();
 
-    }
-    public FXMLLoader getFxmlLoader() {
-        return fxmlLoader;
     }
 
 }

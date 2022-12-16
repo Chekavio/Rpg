@@ -22,17 +22,16 @@ public class ControllerLevelUp extends Controller{
     public void initialize(GUIParser parser) {
         this.game = parser.getGame();
         this.parser = parser;
-        game.upgrade(1);
         upgradeSetText();
         buttonOne.setOnAction(actionEvent -> {
         int bonus =1;
             game.levelUp(game.getLevel(),game.getEquipe(), game.getInventory(), bonus);
-            parser.fight();
+            parser.builHorde();
         });
         buttonTwo.setOnAction(actionEvent -> {
             int bonus =2;
             game.levelUp(game.getLevel(),game.getEquipe(), game.getInventory(), bonus);
-            parser.fight();
+            parser.builHorde();
         });
 
     }

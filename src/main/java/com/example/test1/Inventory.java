@@ -2,8 +2,18 @@ package com.example.test1;
 
 import java.util.ArrayList;
 
-public class Inventory {
-
+public class Inventory{
+    protected String name;
+    protected double value;
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getName() {
+        return name;
+    }
+    public double getValue() {
+        return value;
+    }
     ArrayList<Stuff> stuffList = new ArrayList<>();
 
     public void addStuff(Stuff stuff){this.stuffList.add(stuff);}

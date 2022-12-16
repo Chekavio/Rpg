@@ -11,7 +11,7 @@
       <font>
          <Font size="18.0" />
       </font></Label>
-   <Label fx:id="myLabel" alignment="CENTER" layoutX="172.0" layoutY="193.0" prefHeight="40.0" prefWidth="300.0" />
+   <Label fx:id="myLabel" alignment="CENTER" layoutX="188.0" layoutY="213.0" prefHeight="40.0" prefWidth="300.0" textFill="RED" />
    <TextField fx:id="nbHeroField" layoutX="250.0" layoutY="173.0" prefHeight="40.0" prefWidth="176.0" />
    <Button fx:id="button" layoutX="300.0" layoutY="248.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="76.0" text="valider" />
 

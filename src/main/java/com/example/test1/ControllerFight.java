@@ -74,11 +74,6 @@ public class ControllerFight extends Controller {
                     parser.loose();
                 }
 
-            }
-            catch (NumberFormatException e){
-                labelAction.setText("Il y a une erreur, réessayez correctement");
-
-
             }catch (Exception e) {
                 e.printStackTrace();
                 labelAction.setText("Il y a une erreur, réessayez correctement");

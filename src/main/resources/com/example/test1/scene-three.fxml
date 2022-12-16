@@ -21,7 +21,7 @@
     <Button fx:id="button" layoutX="124.0" layoutY="339.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" text="Valider" />
     <Label contentDisplay="CENTER" layoutX="14.0" layoutY="87.0" text="Type de classe :" />
     <Label contentDisplay="CENTER" layoutX="14.0" layoutY="300.0" text="Nom du héro :" />
-    <Label fx:id="myLabel" layoutX="177.0" layoutY="14.0" prefHeight="18.0" prefWidth="356.0" />
+    <Label fx:id="myLabel" alignment="CENTER" layoutX="177.0" layoutY="14.0" prefHeight="18.0" prefWidth="356.0" />
     <Button fx:id="button1" layoutX="124.0" layoutY="83.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" text="Warrior" />
     <Button fx:id="button3" layoutX="124.0" layoutY="173.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" text="Healer" />
     <Button fx:id="button4" layoutX="124.0" layoutY="226.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" text="Mage" />

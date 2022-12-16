@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -32,6 +33,8 @@ public class ControllerInventory extends Controller{
     @FXML
     public TableView<Hero> tableViewHero;
     @FXML
+    public Label label;
+    @FXML
     public TableView<Inventory> tableViewInventory;
     @Override
     public void initialize(GUIParser parser) {
@@ -40,12 +43,18 @@ public class ControllerInventory extends Controller{
         makeTableStuff();
         makeTableHero();
         button.setOnAction(actionEvent -> {
-            Hero hero = tableViewHero.getSelectionModel().getSelectedItem();
-            Inventory inventory = tableViewInventory.getSelectionModel().getSelectedItem();
-            game.useStuff(hero, inventory);
-            tableViewInventory.refresh();
-            tableViewHero.refresh();
-            parser.fight();
+            try{
+                Hero hero = tableViewHero.getSelectionModel().getSelectedItem();
+                Inventory inventory = tableViewInventory.getSelectionModel().getSelectedItem();
+                game.useStuff(hero, inventory);
+                tableViewInventory.refresh();
+                tableViewHero.refresh();
+                parser.fight();
+            }catch (Exception e){
+                e.printStackTrace();
+                label.setText("Il y a une erreur, réessayez correctement");
+            }
+
         });
         buttonExit.setOnAction(actionEvent -> {
 

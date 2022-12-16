@@ -45,7 +45,7 @@ public class Horde {
         }
 
     }
-    public void attack(Equipe equipe, InputParser inputParser){
+    public void attack(Hero hero, Equipe equipe, InputParser inputParser){
         Random random = new Random();
         int h = random.nextInt(equipe.equipeList.size()) + 1;
         int a = random.nextInt(this.hordeList.size()) + 1;
@@ -54,6 +54,7 @@ public class Horde {
                 ".\nIl ne lui reste plus que "+equipe.getHero(h).getHealth()+" points de vie !");
 
         equipe.HeroIsDeadCheck(h, equipe.getHero(h),inputParser);
+        equipe.HeroIsDeadCHeckGUI(hero);
     }
 
 

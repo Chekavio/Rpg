@@ -29,6 +29,13 @@ public class Equipe {
         }
 
     }
+    public void HeroIsDeadCHeckGUI(Hero hero){
+        if(hero.getHealth()<=0){
+            this.equipeList.remove(hero);
+
+        }
+
+    }
 
 
 

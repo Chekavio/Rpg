@@ -276,7 +276,7 @@ public class Game {
                     inputparser.printMessage("C'est le tour de : "+allCombatant.get(perso).getName());
 
                     if(allCombatant.get(perso) instanceof Enemy){
-                        horde.attack(equipe, inputparser);
+                     //   horde.attack(hero, equipe, inputparser);
                         allCombatant.remove(allCombatant.remove(perso));
                         if(equipe.equipeList.size()==0){
                             inputparser.printMessage("Tout vos héros sont mort : GAME OVER");
@@ -411,7 +411,7 @@ public class Game {
         hero.attackGUI(enemy, horde, equipe);
 
         if(horde.hordeList.size()>0){
-            horde.attack(equipe, inputparser);
+            horde.attack(hero, equipe, inputparser);
         }
 
     }

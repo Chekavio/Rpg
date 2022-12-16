@@ -57,9 +57,16 @@ public class ControllerFight extends Controller {
                 Hero hero = tableViewHero.getSelectionModel().getSelectedItem();
                 Enemy enemy = tableViewEnemy.getSelectionModel().getSelectedItem();
                 game.dealDamage(hero,enemy);
-                makeTableHero();
-                makeTableEnemy();
-                labelAction.setText("");
+                tableViewEnemy.setItems(enemyListMaker());
+                tableViewHero.setItems(heroListMaker());
+                tableViewEnemy.refresh();
+                tableViewHero.refresh();
+                //makeTableEnemy();
+                //makeTableHero();
+                //tableViewEnemy.getSelectionModel().getSelectedItem().setHealth(enemy.getHealth());
+                //tableViewHero.getSelectionModel().getSelectedItem().setHealth(hero.getHealth());
+
+                // labelAction.setText("");
                 if(game.getHorde().hordeList.size()==0){
                     parser.levelUp();
                 }
@@ -92,6 +99,10 @@ public class ControllerFight extends Controller {
         Horde horde = this.parser.game.getHorde();
         ObservableList<Enemy> listEnemy = FXCollections.observableArrayList();
         listEnemy.addAll(horde.hordeList);
+        System.out.println(listEnemy);
+        for (Enemy en: listEnemy) {
+            System.out.printf("enemy's health: %s%n", en.health);
+        }
 
         return listEnemy;
     }

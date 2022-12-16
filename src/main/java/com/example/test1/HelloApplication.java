@@ -57,7 +57,7 @@ public class HelloApplication extends Application {
 
         Scene scene = new Scene(root, 320, 240);
         this.stage.setScene(scene);
-        this.stage.show();
+         this.stage.show();
     }
     public static void lancer() {
         launch();

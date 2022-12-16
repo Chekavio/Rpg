@@ -4,11 +4,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="710.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test1.ControllerLevelUp">
-   <children>
-      <Button fx:id="buttonOne" layoutX="307.0" layoutY="287.0" mnemonicParsing="false" prefHeight="5.0" prefWidth="96.0" text="Valider" />
-      <Label fx:id="labelOne" alignment="CENTER" layoutX="110.0" layoutY="127.0" prefHeight="18.0" prefWidth="489.0" text="Label" />
-      <Label fx:id="labelTwo" alignment="CENTER" layoutX="91.0" layoutY="260.0" prefHeight="18.0" prefWidth="527.0" text="Label" />
-      <Button fx:id="buttonTwo" layoutX="307.0" layoutY="164.0" mnemonicParsing="false" prefHeight="5.0" prefWidth="96.0" text="Valider" />
-   </children>
+<AnchorPane prefHeight="400.0" prefWidth="710.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.test1.ControllerLevelUp">
+   <Button fx:id="buttonTwo" layoutX="307.0" layoutY="287.0" mnemonicParsing="false" prefHeight="5.0" prefWidth="96.0"
+           text="Valider"/>
+   <Label fx:id="labelOne" alignment="CENTER" layoutX="110.0" layoutY="127.0" prefHeight="18.0" prefWidth="489.0"
+          text="Label"/>
+   <Label fx:id="labelTwo" alignment="CENTER" layoutX="91.0" layoutY="260.0" prefHeight="18.0" prefWidth="527.0"
+          text="Label"/>
+   <Button fx:id="buttonOne" layoutX="307.0" layoutY="164.0" mnemonicParsing="false" prefHeight="5.0" prefWidth="96.0"
+           text="Valider"/>
 </AnchorPane>

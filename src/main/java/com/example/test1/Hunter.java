@@ -15,8 +15,8 @@ public class Hunter extends Hero {
 
     @Override
     public void attack(int a, Horde horde, Equipe equipe, InputParser inputParser) {
-        hasArrow();
-        if(hasArrow()){
+
+        if(this.arrow>=1){
             horde.getEnemy(a).health = horde.getEnemy(a).health - this.damage;
             this.arrow = this.arrow-1;
             inputParser.printMessage("Votre "+this.getName()+" a infligé "+this.getDamage()+
@@ -31,6 +31,19 @@ public class Hunter extends Hero {
 
 
     }
+    @Override
+    public void attackGUI(Enemy enemy, Horde horde, Equipe equipe) {
+
+        if(this.arrow>=1){
+            enemy.health = enemy.getHealth() - this.damage;
+            this.arrow = this.arrow-1;
+            equipe.reload();
+            horde.EnemyIsDeadCheckGUI(enemy);
+
+        }else{
+            System.out.println("Plus de flêches");
+        }
+    }
 
     @Override
     public void printHero(Equipe equipe, InputParser inputParser) {
@@ -39,15 +52,9 @@ public class Hunter extends Hero {
 
     }
 
-    public boolean hasArrow(){
-        if(this.arrow>=1){
-            return true;
 
-        }else{
-            return false;
-        }
 
-    }
+
     public void printHeroStat(Equipe equipe, InputParser inputParser) {
         inputParser.printMessage(this.classType+ "| attaque : "+ this.getDamage()+"| vitalité : "+this.getHealth() +
                 "| résistance : "+this.resistance+ "| flêches : "+this.arrow);

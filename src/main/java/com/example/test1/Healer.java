@@ -46,6 +46,11 @@ public class Healer extends SpellCaster {
         }
 
     @Override
+    public void attackGUI(Enemy enemy, Horde horde, Equipe equipe) {
+
+    }
+
+    @Override
 
     public void printHero(Equipe equipe, InputParser inputParser){
         inputParser.printMessage("("+(equipe.equipeList.indexOf(this) +1)+") "+this.classType+" Nom : "+ this.getName()+"| attaque : "

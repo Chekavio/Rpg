@@ -44,11 +44,8 @@ public class ControllerChoiceHero extends Controller{
             try {
                 heroParameters();
                 makeTable();
-                herocompteur++;
-                game.setHerocompteur(herocompteur);
 
-                if(game.getHerocompteur()==game.getNombreHero()){
-                    game.buildHorde(game.getNombreHero(), game.getLevel());
+                if(game.getNombreHero()==game.getEquipe().equipeList.size()){
                     parser.fight();
                 }
 
@@ -56,21 +53,19 @@ public class ControllerChoiceHero extends Controller{
            catch (NumberFormatException e){
                 myLabel.setText("Il y a une erreur, réessayez correctement");
 
+
             }catch (Exception e) {
                 e.printStackTrace();
                 myLabel.setText("Il y a une erreur, réessayez correctement");
+
             }
 
         });
-
-        //Hero hero = tableView.getSelectionModel().getSelectedItem();//selectionner un hero dans le tableau
     }
     public ObservableList<Hero> heroListMaker(){
         Equipe equipe = this.parser.game.getEquipe();
         ObservableList<Hero> list = FXCollections.observableArrayList();
-        for(Combatant combatant : equipe.equipeList){
-          list.add((Hero) combatant);
-        }
+        list.addAll(equipe.equipeList);
 
        return list;
 

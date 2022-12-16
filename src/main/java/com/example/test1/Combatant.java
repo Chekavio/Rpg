@@ -34,5 +34,9 @@ public abstract class Combatant {
     public double getResistance() {
         return resistance;
     }
+
+    public void setHealth(double health) {
+        this.health = health;
+    }
 }
 

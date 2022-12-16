@@ -38,6 +38,13 @@ public class Horde {
         }
 
     }
+    public void EnemyIsDeadCheckGUI(Enemy enemy){
+        if(enemy.getHealth()<=0){
+            this.hordeList.remove(enemy);
+
+        }
+
+    }
     public void attack(Equipe equipe, InputParser inputParser){
         Random random = new Random();
         int h = random.nextInt(equipe.equipeList.size()) + 1;

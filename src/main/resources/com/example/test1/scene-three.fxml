@@ -7,9 +7,9 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test1.ControllerChoiceHero">
+<AnchorPane prefHeight="400.0" prefWidth="710.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test1.ControllerChoiceHero">
    <children>
-      <TableView fx:id="tableView" layoutX="71.0" layoutY="64.0" prefHeight="200.0" prefWidth="378.0">
+      <TableView fx:id="tableView" layoutX="166.0" layoutY="45.0" prefHeight="200.0" prefWidth="378.0">
         <columns>
           <TableColumn fx:id="classType" prefWidth="75.0" text="Classe" />
           <TableColumn fx:id="name" prefWidth="75.0" text="Nom" />
@@ -18,15 +18,15 @@
             <TableColumn fx:id="restistance" prefWidth="75.0" text="Résistence" />
         </columns>
       </TableView>
-      <TextField fx:id="classField" layoutX="54.0" layoutY="309.0" prefHeight="18.0" prefWidth="84.0" />
-      <TextField fx:id="nameField" layoutX="260.0" layoutY="310.0" />
-      <Button fx:id="button" layoutX="463.0" layoutY="310.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" text="Valider" />
-      <Label contentDisplay="CENTER" layoutX="55.0" layoutY="281.0" text="Type de classe :" />
-      <Label contentDisplay="CENTER" layoutX="296.0" layoutY="281.0" text="Nom du héro :" />
-      <Label fx:id="warriorLabel" alignment="CENTER" layoutX="13.0" layoutY="336.0" prefHeight="26.0" prefWidth="82.0" text="Warrior : 1" />
-       <Label fx:id="hunterLabel" alignment="CENTER" layoutX="96.0" layoutY="336.0" prefHeight="26.0" prefWidth="82.0" text="Hunter  :  2" />
-       <Label fx:id="healerLabel" alignment="CENTER" layoutX="14.0" layoutY="362.0" prefHeight="26.0" prefWidth="82.0" text="Healer   : 3" />
-       <Label fx:id="mageLabel" alignment="CENTER" layoutX="96.0" layoutY="362.0" prefHeight="26.0" prefWidth="82.0" text="Mage    : 4" />
-      <Label fx:id="myLabel" layoutX="201.0" layoutY="27.0" prefHeight="18.0" prefWidth="198.0" />
+      <TextField fx:id="classField" layoutX="124.0" layoutY="309.0" prefHeight="18.0" prefWidth="84.0" />
+      <TextField fx:id="nameField" layoutX="280.0" layoutY="309.0" />
+      <Button fx:id="button" layoutX="501.0" layoutY="309.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" text="Valider" />
+      <Label contentDisplay="CENTER" layoutX="125.0" layoutY="281.0" text="Type de classe :" />
+      <Label contentDisplay="CENTER" layoutX="316.0" layoutY="281.0" text="Nom du héro :" />
+      <Label fx:id="warriorLabel" alignment="CENTER" layoutX="55.0" layoutY="79.0" prefHeight="26.0" prefWidth="82.0" text="Warrior : 1" />
+       <Label fx:id="hunterLabel" alignment="CENTER" layoutX="55.0" layoutY="118.0" prefHeight="26.0" prefWidth="82.0" text="Hunter  :  2" />
+       <Label fx:id="healerLabel" alignment="CENTER" layoutX="55.0" layoutY="160.0" prefHeight="26.0" prefWidth="82.0" text="Healer   : 3" />
+       <Label fx:id="mageLabel" alignment="CENTER" layoutX="55.0" layoutY="200.0" prefHeight="26.0" prefWidth="82.0" text="Mage    : 4" />
+      <Label fx:id="myLabel" layoutX="177.0" layoutY="14.0" prefHeight="18.0" prefWidth="356.0" />
    </children>
 </AnchorPane>

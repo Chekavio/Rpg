@@ -39,7 +39,7 @@ public class HelloApplication extends Application {
 
         stage.setX(50);
         stage.setY(50);
-        stage.setWidth(640);
+        stage.setWidth(710);
         stage.setHeight(480);
         stage.setResizable(false);
         stage.setFullScreen(false);

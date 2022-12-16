@@ -15,7 +15,6 @@ public class Game {
     private Horde horde = new Horde();
     private HelloApplication app;
 
-    public int herocompteur;
     public int classe;
     public int nombreHero;
     public int level;
@@ -46,6 +45,9 @@ public class Game {
 
     public void setLevel(int level){
         this.level = level;
+    }
+    public void upgrade(int i){
+        this.level=level+1;
     }
 
     public static void welcome(){
@@ -132,7 +134,7 @@ public class Game {
             }
 
         }
-        fight(equipe, horde, tour, inventory);
+       // fight(equipe, horde, tour, inventory);
 
     }
 
@@ -159,7 +161,7 @@ public class Game {
         }
     }
 
-    public void levelUp(int level, Equipe equipe, Inventory inventory){
+    public void levelUp(int level, Equipe equipe, Inventory inventory, int bonus){
         switch (level){
 
             case 1:
@@ -167,7 +169,7 @@ public class Game {
                 "\n(1) Toute votre équipe gagne 10 points de dégats\n(2) Toute votre équipe gagne 10 points de réduction de dégats");
                 boolean choice = false;
                 while (!choice){
-                    int bonus = inputparser.getIntInRange(1,2);
+                    //bonus = inputparser.getIntInRange(1,2);
                     switch (bonus){
                         case 1:
                             for(int h =1; h<(equipe.equipeList.size()+1); h++){
@@ -188,7 +190,7 @@ public class Game {
             case 2:
                 inputparser.printMessage("Vous passez au niveau supérieur !\nVeuillez choisir un bonus :" +
                         "\n(1) Obtenir 5 potions de heal\n(2) Toute votre équipe gagne 30 points de vie");
-                int bonus = inputparser.getIntInRange(1,2);
+               // bonus = inputparser.getIntInRange(1,2);
                 switch (bonus){
                     case 1:
                         for(int h=0; h<5; h++){
@@ -205,7 +207,7 @@ public class Game {
             case 3:
                 inputparser.printMessage("Vous passez au niveau supérieur !\nVeuillez choisir un bonus :" +
                         "\n(1) Toute votre équipe gagne 25 points d'attaque\n(2) Toute votre équipe gagne 100 points de vie");
-                bonus = inputparser.getIntInRange(1,2);
+                //bonus = inputparser.getIntInRange(1,2);
                 switch (bonus){
                     case 1:
                         for(int h =1; h<(equipe.equipeList.size()+1); h++){
@@ -342,7 +344,7 @@ public class Game {
 
                 level ++;
                 gameCheck(level);
-                levelUp(level, equipe, inventory);
+
 
 
         }
@@ -355,12 +357,12 @@ public class Game {
         return equipe;
     }
 
-    public Inventory getInventory() {
-        return inventory;
+    public Horde getHorde() {
+        return horde;
     }
 
-    public void setHerocompteur(int herocompteur) {
-        this.herocompteur = herocompteur;
+    public Inventory getInventory() {
+        return inventory;
     }
 
     public void setClasse(int classe) {
@@ -377,10 +379,6 @@ public class Game {
 
     public int getClasse() {
         return classe;
-    }
-
-    public int getHerocompteur() {
-        return herocompteur;
     }
 
     public int getNombreHero() {
@@ -406,6 +404,14 @@ public class Game {
             case 4:
                 new Mage(name,25.0,100.0,30,0, equipe);
                 break;
+        }
+
+    }
+    public void dealDamage(Hero hero, Enemy enemy){
+        hero.attackGUI(enemy, horde, equipe);
+
+        if(horde.hordeList.size()>0){
+            horde.attack(equipe, inputparser);
         }
 
     }

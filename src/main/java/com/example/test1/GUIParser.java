@@ -68,4 +68,18 @@ public class GUIParser implements InputParser {
             throw new RuntimeException(e);
         }
     }
+    public void levelUp() {
+        try {
+            this.app.changeScene("scene-five.fxml", this);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void loose() {
+        try {
+            this.app.changeScene("scene-loose.fxml", this);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
